@@ -9,7 +9,7 @@ buildStudentProfile(){
     System.out.print(" New Email (ENTER to Skip): ");
     String email = sc.nextLine.trim();
     System.out.print(" Program (ENTER to Skip): ");
-    String PROG + sc.nextLine.trim();
+    String prog + sc.nextLine.trim();
 
     if(!name.is.Empty())
         s.setName(name);
