@@ -1,37 +1,54 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-import java.util.*;
+public class Student extends Person {
 
-public class KitchenManager {
-    private List<Student> studentList = new ArrayList<>();
-    private List<Kitchen> kitchenList = new ArrayList<>();
+    private String studentId;
+    private String level;
+    private String program;
+    private String kitchenBooked;
 
-    public static void main(String[] args) {
-        KitchenManager manager = new KitchenManager();
-        manager.startSystem();
+    // Builder Pattern
+    public static class Builder {
+        private String name;
+        private String email;
+        private String studentId;
+        private String level   = "Beginner";
+        private String program = "BS Culinary Arts";
+
+        public Builder(String name, String email) {
+            this.name  = name;
+            this.email = email;
+        }
+
+        public Builder studentId(String id) { this.studentId = id; return this; }
+        public Builder level(String level)  { this.level     = level; return this; }
+        public Builder program(String prog) { this.program   = prog; return this; }
+
+        public Student build() {
+            return new Student(this);
+        }
     }
 
-    public void startSystem() {
-        System.out.println("Culinary Institute System Started.");
-        // Initialize data
-        enroll("Chef Alex", "S001", 101);
+    private Student(Builder builder) {
+        super(builder.name, builder.email);
+        studentId     = builder.studentId;
+        level         = builder.level;
+        program       = builder.program;
+        kitchenBooked = "None";
     }
 
-    public void enroll(String name, String id, int roomNum) {
-        Student s = new NewStudent().setName(name).setId(id).setLevel("Beginner").build();
-        studentList.add(s);
-        System.out.println("Student " + name + " enrolled.");
-    }
+    public String getStudentId()     { return studentId; }
+    public String getLevel()         { return level; }
+    public String getProgram()       { return program; }
+    public String getKitchenBooked() { return kitchenBooked; }
 
-    public void runRecordsProcess(String studentID, int kitchenID) {
-        // Logic to process a booking
-    }
+    public void setLevel(String level)           { this.level = level; }
+    public void setProgram(String program)       { this.program = program; }
+    public void setKitchenBooked(String kitchen) { this.kitchenBooked = kitchen; }
 
-    public void generateReport() {
-        System.out.println("Generating daily kitchen report...");
-    }
+    public String getRole() { return "Student"; }
 
-    public String viewKitchenAvailability(int roomNumber) {
-        return "Kitchen " + roomNumber + " is currently open.";
+    public String toString() {
+        return "[" + studentId + "] " + getName() + " | Program: " + program + " | Level: " + level + " | Kitchen: " + kitchenBooked;
     }
 }
