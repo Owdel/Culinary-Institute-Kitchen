@@ -13,3 +13,12 @@ private static void checkKitchenSchedule() {
     if (!any) System.out.println("  No bookings recorded yet.");
     pause();
 }
+
+private static void checkKitchenAvailability(){
+    System.out.println(" ---Kitchen Availability--- ");
+    System.out.println(" ID Name Status");
+    System.out.println(" " + "-".repeat(50));
+    for(Kitchen k: kitchens.values())
+    System.out.println(" "+k.getKitchenId() + " " + k.getKitchenName() + "-" + k.getStatus());
+    pause();
+}
