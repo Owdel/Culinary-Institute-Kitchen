@@ -1,37 +1,15 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-import java.util.*;
-
-public class KitchenManager {
-    private List<Student> studentList = new ArrayList<>();
-    private List<Kitchen> kitchenList = new ArrayList<>();
-
-    public static void main(String[] args) {
-        KitchenManager manager = new KitchenManager();
-        manager.startSystem();
+private static void checkKitchenSchedule() {
+    System.out.println("  --- Kitchen Schedule ---");
+    boolean any = false;
+    for (Kitchen k : kitchens.values()) {
+        if (!k.getLogs().isEmpty()) {
+            System.out.println("\n  " + k.getKitchenName() + ":");
+            for (Kitchen.Log log : k.getLogs()) System.out.println(log);
+            any = true;
+        }
     }
-
-    public void startSystem() {
-        System.out.println("Culinary Institute System Started.");
-        // Initialize data
-        enroll("Chef Alex", "S001", 101);
-    }
-
-    public void enroll(String name, String id, int roomNum) {
-        Student s = new NewStudent().setName(name).setId(id).setLevel("Beginner").build();
-        studentList.add(s);
-        System.out.println("Student " + name + " enrolled.");
-    }
-
-    public void runRecordsProcess(String studentID, int kitchenID) {
-        // Logic to process a booking
-    }
-
-    public void generateReport() {
-        System.out.println("Generating daily kitchen report...");
-    }
-
-    public String viewKitchenAvailability(int roomNumber) {
-        return "Kitchen " + roomNumber + " is currently open.";
-    }
+    if (!any) System.out.println("  No bookings recorded yet.");
+    pause();
 }
