@@ -13,3 +13,16 @@ private static void checkKitchenSchedule() {
     if (!any) System.out.println("  No bookings recorded yet.");
     pause();
 }
+
+private static void viewKitchenStatus() {
+    System.out.println("  --- Kitchen Status ---");
+    for (Kitchen k : kitchens.values()) {
+        System.out.println("\n  " + k);
+        System.out.println("  Sections:");
+        for (Kitchen.Section sec : k.getSections()) System.out.println(sec);
+        System.out.println("  Logs (" + k.getLogs().size() + "):");
+        if (k.getLogs().isEmpty()) System.out.println("    No logs yet.");
+        else for (Kitchen.Log log : k.getLogs()) System.out.println(log);
+    }
+    pause();
+}
