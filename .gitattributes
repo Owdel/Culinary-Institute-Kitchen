@@ -1,0 +1,27 @@
+private static void bookKitchen() {
+    System.out.println("  --- Book Kitchen ---");
+    Student s = pickStudent();
+    if (s == null) return;
+
+    System.out.println("\n  Available Kitchens:");
+    for (Kitchen k : kitchens.values()) System.out.println("  " + k);
+
+    System.out.print("\n  Kitchen ID: "); String kid = sc.nextLine().trim().toUpperCase();
+    Kitchen k = kitchens.get(kid);
+    if (k == null || !k.isAvailable()) {
+        System.out.println("  Kitchen not found or unavailable."); pause(); return;
+    }
+
+    System.out.print("  Purpose: "); String purpose = sc.nextLine().trim();
+    if (purpose.isEmpty()) purpose = "Practice Session";
+
+    k.setStatus("Occupied");
+    k.setAssignedStudent(s.getName());
+    s.setKitchenBooked(k.getKitchenName());
+
+    String logId = "LOG-" + logCount++;
+    k.addLog(new Kitchen.Log(logId, s.getName(), purpose));
+
+    System.out.println("  Kitchen booked! Log created: " + logId);
+    pause();
+}
