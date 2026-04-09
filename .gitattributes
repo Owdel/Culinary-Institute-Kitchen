@@ -1,0 +1,24 @@
+private static void confirmKitchenLog() {
+    System.out.println("  --- Confirm Kitchen Log ---");
+    boolean any = false;
+    for (Kitchen k : kitchens.values())
+        for (Kitchen.Log log : k.getLogs()) {
+            System.out.println(log);
+            any = true;
+        }
+    if (!any) { System.out.println("  No logs found."); pause(); return; }
+
+    System.out.print("\n  Enter Log ID to confirm: "); String logId = sc.nextLine().trim();
+    for (Kitchen k : kitchens.values()) {
+        for (Kitchen.Log log : k.getLogs()) {
+            if (log.getLogId().equalsIgnoreCase(logId)) {
+                log.confirm();
+                k.setStatus("Available");
+                k.setAssignedStudent("None");
+                System.out.println("  Log confirmed. Kitchen released.");
+                pause(); return;
+            }
+        }
+    }
+    System.out.println("  Log ID not found."); pause();
+}
