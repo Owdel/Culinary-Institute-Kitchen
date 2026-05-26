@@ -1,14 +1,55 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-private static void checkKitchenSchedule() {
-    System.out.println("  --- Kitchen Schedule ---");
-    boolean any = false;
-    for (Kitchen k : kitchens.values()) {
-        if (!k.getLogs().isEmpty()) {
-            System.out.println("\n  " + k.getKitchenName() + ":");
-            for (Kitchen.Log log : k.getLogs()) System.out.println(log);
-            any = true;
+public class Student extends Person {
+
+    private String studentId;
+    private String level;
+    private String program;
+    private String kitchenBooked;
+
+    // Builder Pattern
+    public static class Builder {
+        private String name;
+        private String email;
+        private String studentId;
+        private String level   = "Beginner";
+        private String program = "BS Culinary Arts";
+
+        public Builder(String name, String email) {
+            this.name  = name;
+            this.email = email;
         }
+
+        public Builder studentId(String id) { this.studentId = id; return this; }
+        public Builder level(String level)  { this.level     = level; return this; }
+        public Builder program(String prog) { this.program   = prog; return this; }
+
+        public Student build() {
+            return new Student(this);
+        }
+    }
+
+    private Student(Builder builder) {
+        super(builder.name, builder.email);
+        studentId     = builder.studentId;
+        level         = builder.level;
+        program       = builder.program;
+        kitchenBooked = "None";
+    }
+
+    public String getStudentId()     { return studentId; }
+    public String getLevel()         { return level; }
+    public String getProgram()       { return program; }
+    public String getKitchenBooked() { return kitchenBooked; }
+
+    public void setLevel(String level)           { this.level = level; }
+    public void setProgram(String program)       { this.program = program; }
+    public void setKitchenBooked(String kitchen) { this.kitchenBooked = kitchen; }
+
+    public String getRole() { return "Student"; }
+
+    public String toString() {
+        return "[" + studentId + "] " + getName() + " | Program: " + program + " | Level: " + level + " | Kitchen: " + kitchenBooked;
     }
     if (!any) System.out.println("  No bookings recorded yet.");
     pause();
